@@ -1,8 +1,16 @@
+queue_rules:
+  - name: default
+    batch_size: 2
+    batch_max_wait_time: 30 s
+    merge_conditions:
+      - check-success=slow-ci
+    queue_conditions:
+      - label=ready-to-merge
+
 pull_request_rules:
-  - name: automerge on label
+  - name: queue on label
     conditions:
       - label=ready-to-merge
-      - check-success=slow-ci
     actions:
-      merge:
-        method: merge
+      queue:
+        name: default
