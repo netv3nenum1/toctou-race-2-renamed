@@ -1,0 +1,8 @@
+pull_request_rules:
+  - name: automerge on label
+    conditions:
+      - label=ready-to-merge
+      - check-success=slow-ci
+    actions:
+      merge:
+        method: merge
