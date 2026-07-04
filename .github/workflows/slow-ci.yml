@@ -1,0 +1,10 @@
+name: Slow CI
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  slow-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: sleep to create race window
+        run: sleep 35 && echo done
