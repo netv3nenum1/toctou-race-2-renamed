@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="canary_suite" tests="2" failures="1">
+    <testcase classname="canary.CanaryTest" name="test_passes_ok" time="0.01"/>
+    <testcase classname="canary.CanaryTest" name="test_injection_probe" time="0.02">
+      <failure message="&lt;img src=x onerror=alert(document.domain)&gt; canary XSS probe" type="AssertionError">
+Traceback (most recent call last):
+  File "test_canary.py", line 42, in test_injection_probe
+    assert False, "&lt;script&gt;alert('canary_stacktrace_xss')&lt;/script&gt;"
+AssertionError: canary payload in stacktrace
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>
