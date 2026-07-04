@@ -6,5 +6,14 @@ jobs:
   slow-ci:
     runs-on: ubuntu-latest
     steps:
-      - name: sleep to create race window
-        run: sleep 20 && echo done
+      - uses: actions/checkout@v4
+      - name: conditional pass/fail based on bad.txt presence
+        run: |
+          sleep 15
+          if [ -f bad.txt ]; then
+            echo "bad.txt present, failing genuinely"
+            exit 1
+          else
+            echo "no bad.txt, passing"
+            exit 0
+          fi
