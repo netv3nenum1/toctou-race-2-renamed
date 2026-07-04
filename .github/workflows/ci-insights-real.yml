@@ -7,25 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create fake test results
-        run: |
-          mkdir -p reports
-          cat > reports/results.xml << 'XMLEOF'
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites>
-  <testsuite name="canary_suite" tests="2" failures="1">
-    <testcase classname="canary.CanaryTest" name="test_passes_ok" time="0.01"/>
-    <testcase classname="canary.CanaryTest" name="test_injection_probe" time="0.02">
-      <failure message="&lt;img src=x onerror=alert(document.domain)&gt; canary XSS probe real gha" type="AssertionError">
-Traceback (most recent call last):
-  File "test_canary.py", line 42, in test_injection_probe
-    assert False, "&lt;script&gt;alert('canary_stacktrace_xss_real_gha')&lt;/script&gt;"
-AssertionError: canary payload in stacktrace
-      </failure>
-    </testcase>
-  </testsuite>
-</testsuites>
-XMLEOF
       - uses: mergifyio/gha-mergify-ci@v22
         with:
           token: mergify_application_key_EUzzhTNAAL4cMDsL2eFZKWjOcwZ0nnxvx-PbTa1x3wV5Oda31a60oKVJe-IHDE6trK-FLas
