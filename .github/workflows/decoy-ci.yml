@@ -1,0 +1,10 @@
+name: Decoy CI
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  slow-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: trivially pass
+        run: echo "decoy check, always passes" && exit 0
