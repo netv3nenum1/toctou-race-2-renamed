@@ -6,5 +6,5 @@ jobs:
   slow-ci:
     runs-on: ubuntu-latest
     steps:
-      - name: sleep to create race window
-        run: sleep 35 && echo done
+      - name: this should genuinely fail
+        run: echo "real CI failing" && exit 1
